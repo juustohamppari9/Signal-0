@@ -1,0 +1,127 @@
+[gd_scene load_steps=11 format=3]
+
+[sub_resource type="StandardMaterial3D" id="mat_steel"]
+albedo_color = Color(0.55, 0.57, 0.6, 1)
+metallic = 0.4
+roughness = 0.7
+
+[sub_resource type="StandardMaterial3D" id="mat_pad"]
+albedo_color = Color(0.42, 0.42, 0.4, 1)
+roughness = 1.0
+
+[sub_resource type="StandardMaterial3D" id="mat_beacon"]
+albedo_color = Color(0.9, 0.12, 0.1, 1)
+roughness = 0.5
+
+[sub_resource type="BoxMesh" id="mesh_pad"]
+material = SubResource("mat_pad")
+size = Vector3(3.6, 0.4, 3.6)
+
+[sub_resource type="BoxMesh" id="mesh_leg"]
+material = SubResource("mat_steel")
+size = Vector3(0.25, 12, 0.25)
+
+[sub_resource type="BoxMesh" id="mesh_beam_x"]
+material = SubResource("mat_steel")
+size = Vector3(3.05, 0.16, 0.16)
+
+[sub_resource type="BoxMesh" id="mesh_beam_z"]
+material = SubResource("mat_steel")
+size = Vector3(0.16, 0.16, 3.05)
+
+[sub_resource type="CylinderMesh" id="mesh_antenna"]
+material = SubResource("mat_steel")
+top_radius = 0.06
+bottom_radius = 0.1
+height = 3.0
+radial_segments = 10
+
+[sub_resource type="SphereMesh" id="mesh_beacon"]
+material = SubResource("mat_beacon")
+radius = 0.2
+height = 0.4
+
+[sub_resource type="BoxShape3D" id="shape_tower"]
+size = Vector3(3.6, 12, 3.6)
+
+[node name="RadioTower" type="StaticBody3D"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+position = Vector3(0, 6, 0)
+shape = SubResource("shape_tower")
+
+[node name="Pad" type="MeshInstance3D" parent="."]
+position = Vector3(0, 0.2, 0)
+mesh = SubResource("mesh_pad")
+
+[node name="LegFL" type="MeshInstance3D" parent="."]
+position = Vector3(-1.4, 6, 1.4)
+mesh = SubResource("mesh_leg")
+
+[node name="LegFR" type="MeshInstance3D" parent="."]
+position = Vector3(1.4, 6, 1.4)
+mesh = SubResource("mesh_leg")
+
+[node name="LegBL" type="MeshInstance3D" parent="."]
+position = Vector3(-1.4, 6, -1.4)
+mesh = SubResource("mesh_leg")
+
+[node name="LegBR" type="MeshInstance3D" parent="."]
+position = Vector3(1.4, 6, -1.4)
+mesh = SubResource("mesh_leg")
+
+[node name="BeamFrontLow" type="MeshInstance3D" parent="."]
+position = Vector3(0, 3, 1.4)
+mesh = SubResource("mesh_beam_x")
+
+[node name="BeamBackLow" type="MeshInstance3D" parent="."]
+position = Vector3(0, 3, -1.4)
+mesh = SubResource("mesh_beam_x")
+
+[node name="BeamLeftLow" type="MeshInstance3D" parent="."]
+position = Vector3(-1.4, 3, 0)
+mesh = SubResource("mesh_beam_z")
+
+[node name="BeamRightLow" type="MeshInstance3D" parent="."]
+position = Vector3(1.4, 3, 0)
+mesh = SubResource("mesh_beam_z")
+
+[node name="BeamFrontMid" type="MeshInstance3D" parent="."]
+position = Vector3(0, 7.5, 1.4)
+mesh = SubResource("mesh_beam_x")
+
+[node name="BeamBackMid" type="MeshInstance3D" parent="."]
+position = Vector3(0, 7.5, -1.4)
+mesh = SubResource("mesh_beam_x")
+
+[node name="BeamLeftMid" type="MeshInstance3D" parent="."]
+position = Vector3(-1.4, 7.5, 0)
+mesh = SubResource("mesh_beam_z")
+
+[node name="BeamRightMid" type="MeshInstance3D" parent="."]
+position = Vector3(1.4, 7.5, 0)
+mesh = SubResource("mesh_beam_z")
+
+[node name="BeamFrontHigh" type="MeshInstance3D" parent="."]
+position = Vector3(0, 12, 1.4)
+mesh = SubResource("mesh_beam_x")
+
+[node name="BeamBackHigh" type="MeshInstance3D" parent="."]
+position = Vector3(0, 12, -1.4)
+mesh = SubResource("mesh_beam_x")
+
+[node name="BeamLeftHigh" type="MeshInstance3D" parent="."]
+position = Vector3(-1.4, 12, 0)
+mesh = SubResource("mesh_beam_z")
+
+[node name="BeamRightHigh" type="MeshInstance3D" parent="."]
+position = Vector3(1.4, 12, 0)
+mesh = SubResource("mesh_beam_z")
+
+[node name="Antenna" type="MeshInstance3D" parent="."]
+position = Vector3(0, 13.5, 0)
+mesh = SubResource("mesh_antenna")
+
+[node name="Beacon" type="MeshInstance3D" parent="."]
+position = Vector3(0, 15.1, 0)
+mesh = SubResource("mesh_beacon")

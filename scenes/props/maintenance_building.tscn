@@ -1,0 +1,128 @@
+[gd_scene load_steps=16 format=3]
+
+[sub_resource type="StandardMaterial3D" id="mat_wall"]
+albedo_color = Color(0.66, 0.68, 0.62, 1)
+roughness = 1.0
+
+[sub_resource type="StandardMaterial3D" id="mat_roof"]
+albedo_color = Color(0.3, 0.3, 0.32, 1)
+roughness = 1.0
+
+[sub_resource type="StandardMaterial3D" id="mat_floor"]
+albedo_color = Color(0.38, 0.37, 0.34, 1)
+roughness = 1.0
+
+[sub_resource type="BoxMesh" id="mesh_floor"]
+material = SubResource("mat_floor")
+size = Vector3(6, 0.2, 5)
+
+[sub_resource type="BoxMesh" id="mesh_back"]
+material = SubResource("mat_wall")
+size = Vector3(6, 3, 0.2)
+
+[sub_resource type="BoxMesh" id="mesh_side"]
+material = SubResource("mat_wall")
+size = Vector3(0.2, 3, 4.6)
+
+[sub_resource type="BoxMesh" id="mesh_front"]
+material = SubResource("mat_wall")
+size = Vector3(2.3, 3, 0.2)
+
+[sub_resource type="BoxMesh" id="mesh_lintel"]
+material = SubResource("mat_wall")
+size = Vector3(1.4, 0.8, 0.2)
+
+[sub_resource type="BoxMesh" id="mesh_roof"]
+material = SubResource("mat_roof")
+size = Vector3(6.6, 0.2, 5.6)
+
+[sub_resource type="BoxShape3D" id="shape_floor"]
+size = Vector3(6, 0.2, 5)
+
+[sub_resource type="BoxShape3D" id="shape_back"]
+size = Vector3(6, 3, 0.2)
+
+[sub_resource type="BoxShape3D" id="shape_side"]
+size = Vector3(0.2, 3, 4.6)
+
+[sub_resource type="BoxShape3D" id="shape_front"]
+size = Vector3(2.3, 3, 0.2)
+
+[sub_resource type="BoxShape3D" id="shape_lintel"]
+size = Vector3(1.4, 0.8, 0.2)
+
+[sub_resource type="BoxShape3D" id="shape_roof"]
+size = Vector3(6.6, 0.2, 5.6)
+
+[node name="MaintenanceBuilding" type="StaticBody3D"]
+
+[node name="Floor" type="MeshInstance3D" parent="."]
+position = Vector3(0, 0.1, 0)
+mesh = SubResource("mesh_floor")
+
+[node name="FloorCollision" type="CollisionShape3D" parent="."]
+position = Vector3(0, 0.1, 0)
+shape = SubResource("shape_floor")
+
+[node name="BackWall" type="MeshInstance3D" parent="."]
+position = Vector3(0, 1.7, -2.4)
+mesh = SubResource("mesh_back")
+
+[node name="BackWallCollision" type="CollisionShape3D" parent="."]
+position = Vector3(0, 1.7, -2.4)
+shape = SubResource("shape_back")
+
+[node name="LeftWall" type="MeshInstance3D" parent="."]
+position = Vector3(-2.9, 1.7, 0)
+mesh = SubResource("mesh_side")
+
+[node name="LeftWallCollision" type="CollisionShape3D" parent="."]
+position = Vector3(-2.9, 1.7, 0)
+shape = SubResource("shape_side")
+
+[node name="RightWall" type="MeshInstance3D" parent="."]
+position = Vector3(2.9, 1.7, 0)
+mesh = SubResource("mesh_side")
+
+[node name="RightWallCollision" type="CollisionShape3D" parent="."]
+position = Vector3(2.9, 1.7, 0)
+shape = SubResource("shape_side")
+
+[node name="FrontWallLeft" type="MeshInstance3D" parent="."]
+position = Vector3(-1.85, 1.7, 2.4)
+mesh = SubResource("mesh_front")
+
+[node name="FrontWallLeftCollision" type="CollisionShape3D" parent="."]
+position = Vector3(-1.85, 1.7, 2.4)
+shape = SubResource("shape_front")
+
+[node name="FrontWallRight" type="MeshInstance3D" parent="."]
+position = Vector3(1.85, 1.7, 2.4)
+mesh = SubResource("mesh_front")
+
+[node name="FrontWallRightCollision" type="CollisionShape3D" parent="."]
+position = Vector3(1.85, 1.7, 2.4)
+shape = SubResource("shape_front")
+
+[node name="DoorLintel" type="MeshInstance3D" parent="."]
+position = Vector3(0, 2.8, 2.4)
+mesh = SubResource("mesh_lintel")
+
+[node name="DoorLintelCollision" type="CollisionShape3D" parent="."]
+position = Vector3(0, 2.8, 2.4)
+shape = SubResource("shape_lintel")
+
+[node name="Roof" type="MeshInstance3D" parent="."]
+position = Vector3(0, 3.3, 0)
+mesh = SubResource("mesh_roof")
+
+[node name="RoofCollision" type="CollisionShape3D" parent="."]
+position = Vector3(0, 3.3, 0)
+shape = SubResource("shape_roof")
+
+[node name="Sign" type="Label3D" parent="."]
+position = Vector3(0, 3.75, 2.55)
+text = "MAINTENANCE"
+font_size = 64
+outline_size = 12
+modulate = Color(0.95, 0.95, 0.9, 1)
