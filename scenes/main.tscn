@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3]
+[gd_scene load_steps=16 format=3]
 
 [ext_resource type="PackedScene" path="res://scenes/player.tscn" id="1_player"]
 [ext_resource type="PackedScene" path="res://scenes/hud.tscn" id="2_hud"]
@@ -7,6 +7,8 @@
 [ext_resource type="PackedScene" path="res://scenes/props/maintenance_building.tscn" id="5_building"]
 [ext_resource type="PackedScene" path="res://scenes/props/generator.tscn" id="6_generator"]
 [ext_resource type="PackedScene" path="res://scenes/props/radio.tscn" id="7_radio"]
+[ext_resource type="PackedScene" path="res://scenes/props/table.tscn" id="8_table"]
+[ext_resource type="PackedScene" path="res://scenes/props/crate.tscn" id="9_crate"]
 
 [sub_resource type="ProceduralSkyMaterial" id="SkyMaterial"]
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
@@ -58,7 +60,7 @@ position = Vector3(0, 1.5, 14)
 [node name="Site" type="Node3D" parent="."]
 
 [node name="RadioTower" parent="Site" instance=ExtResource("4_tower")]
-position = Vector3(-16, 0, -12)
+position = Vector3(-10, 0, -8)
 
 [node name="Building" parent="Site" instance=ExtResource("5_building")]
 position = Vector3(0, -0.18, 0)
@@ -66,8 +68,17 @@ position = Vector3(0, -0.18, 0)
 [node name="Generator" parent="Site" instance=ExtResource("6_generator")]
 position = Vector3(-4.5, 0, 2)
 
+[node name="Table" parent="Site" instance=ExtResource("8_table")]
+position = Vector3(1.4, 0.02, -1.6)
+
 [node name="Radio" parent="Site" instance=ExtResource("7_radio")]
-position = Vector3(1.1, 0.02, 1.6)
+position = Vector3(1.4, 0.82, -1.6)
+
+[node name="Crate01" parent="Site" instance=ExtResource("9_crate")]
+position = Vector3(-1.9, 0.02, -1.5)
+
+[node name="Crate02" parent="Site" instance=ExtResource("9_crate")]
+position = Vector3(-1.9, 0.02, -0.7)
 
 [node name="Forest" type="Node3D" parent="."]
 

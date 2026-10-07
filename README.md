@@ -10,6 +10,7 @@ Everything is built from Godot primitive meshes — no imported assets.
 | Input   | Action                                        |
 | ------- | --------------------------------------------- |
 | `W A S D` | Move                                          |
+| `Shift` | Sprint (1.8x move speed)                      |
 | Mouse   | Look (captured on start)                      |
 | `Space` | Jump                                          |
 | `E`     | Interact with whatever is under the crosshair |
@@ -17,19 +18,20 @@ Everything is built from Godot primitive meshes — no imported assets.
 
 ## What is in the prototype
 
-- First-person player (`CharacterBody3D`) with movement, mouse look, jump, interaction ray.
+- First-person player (`CharacterBody3D`) with movement, sprint, mouse look, jump, interaction ray.
 - Flat 160 x 160 m terrain.
 - Forest of 34 primitive trees (cylinder trunk + cone canopy).
-- Lattice radio mast with antenna and beacon.
-- Maintenance building you can walk into (doorway at the front).
+- Lattice radio mast with antenna and beacon, standing right next to the building.
+- Maintenance building you can walk into (doorway at the front), furnished with a
+  table and a couple of crates.
 - Generator next to the building: `E` starts / stops it (indicator light + label change).
-- Radio inside the building: `E` tunes the next channel (label above it changes).
+- Radio on the table inside the building: `E` tunes the next channel (label above it changes).
 - Minimal HUD: crosshair, interaction prompt, control hints.
 
 ## Project structure
 
 ```
-project.godot              Project config + input actions (move/jump/interact)
+project.godot              Project config + input actions (move/sprint/jump/interact)
 scenes/
   main.tscn                World: terrain, sun, sky, props, forest, player, HUD
   player.tscn              First-person player (capsule + head + camera + ray)
@@ -40,6 +42,8 @@ scenes/
     maintenance_building.tscn  Walls, floor, roof, doorway (enterable)
     generator.tscn         Interactable generator
     radio.tscn             Interactable radio
+    table.tscn             Primitive table (radio sits on top of it)
+    crate.tscn             Primitive crate (two of them inside the building)
 scripts/
   player.gd                Movement, mouse look, jump, interaction
   interactable.gd          Base class for interactable objects (get_prompt / interact)
@@ -67,8 +71,8 @@ godot --path .
   and `interact()`, put the scene root in the `interactable` group and give it a
   collision shape. The player's ray does the rest.
 - **Input:** change bindings in *Project Settings -> Input Map* (`move_forward`,
-  `move_back`, `move_left`, `move_right`, `jump`, `interact`).
-- **Tuning:** the player exports `move_speed`, `jump_velocity`,
+  `move_back`, `move_left`, `move_right`, `sprint`, `jump`, `interact`).
+- **Tuning:** the player exports `move_speed`, `sprint_multiplier`, `jump_velocity`,
   `mouse_sensitivity` and `interact_distance` in the inspector.
 - **World layout:** every prop in `scenes/main.tscn` is an ordinary instance —
   move, duplicate or delete them directly in the editor.

@@ -3,12 +3,14 @@ extends CharacterBody3D
 ##
 ## Controls (defined in Project Settings > Input Map):
 ##   WASD        - move
+##   Shift       - sprint
 ##   Mouse       - look
 ##   Space       - jump
 ##   E           - interact with whatever is under the crosshair
 ##   Esc / Click - release / capture the mouse
 
 @export var move_speed: float = 5.0
+@export var sprint_multiplier: float = 1.8
 @export var jump_velocity: float = 4.5
 @export var mouse_sensitivity: float = 0.0022
 @export var interact_distance: float = 3.0
@@ -68,8 +70,12 @@ func _apply_movement(delta: float) -> void:
 	var input := Input.get_vector("move_left", "move_right", "move_forward", "move_back")
 	var direction := (transform.basis * Vector3(input.x, 0.0, input.y)).normalized()
 
+	var speed := move_speed
+	if Input.is_action_pressed("sprint"):
+		speed *= sprint_multiplier
+
 	var acceleration := ACCELERATION if is_on_floor() else AIR_ACCELERATION
-	var target := direction * move_speed
+	var target := direction * speed
 	velocity.x = move_toward(velocity.x, target.x, acceleration * delta)
 	velocity.z = move_toward(velocity.z, target.z, acceleration * delta)
 
