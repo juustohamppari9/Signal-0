@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3]
+[gd_scene load_steps=23 format=3]
 
 [ext_resource type="PackedScene" path="res://scenes/player.tscn" id="1_player"]
 [ext_resource type="PackedScene" path="res://scenes/hud.tscn" id="2_hud"]
@@ -34,6 +34,34 @@ size = Vector2(160, 160)
 [sub_resource type="BoxShape3D" id="shape_ground"]
 size = Vector3(160, 1, 160)
 
+[sub_resource type="StandardMaterial3D" id="mat_wire"]
+albedo_color = Color(0.08, 0.08, 0.09, 1)
+roughness = 0.9
+
+[sub_resource type="BoxMesh" id="mesh_wire_a1"]
+material = SubResource("mat_wire")
+size = Vector3(1.2, 0.07, 0.07)
+
+[sub_resource type="BoxMesh" id="mesh_wire_drop"]
+material = SubResource("mat_wire")
+size = Vector3(0.07, 0.4, 0.07)
+
+[sub_resource type="BoxMesh" id="mesh_wire_a3"]
+material = SubResource("mat_wire")
+size = Vector3(0.3, 0.07, 0.07)
+
+[sub_resource type="BoxMesh" id="mesh_wire_b1"]
+material = SubResource("mat_wire")
+size = Vector3(0.07, 0.07, 1.4)
+
+[sub_resource type="BoxMesh" id="mesh_wire_b3"]
+material = SubResource("mat_wire")
+size = Vector3(0.07, 0.07, 0.6)
+
+[sub_resource type="BoxMesh" id="mesh_wire_b4"]
+material = SubResource("mat_wire")
+size = Vector3(0.07, 0.07, 4.1485)
+
 [node name="Main" type="Node3D"]
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
@@ -60,13 +88,13 @@ position = Vector3(0, 1.5, 14)
 [node name="Site" type="Node3D" parent="."]
 
 [node name="RadioTower" parent="Site" instance=ExtResource("4_tower")]
-position = Vector3(-10, 0, -8)
+position = Vector3(-6.5, 0, -6)
 
 [node name="Building" parent="Site" instance=ExtResource("5_building")]
 position = Vector3(0, -0.18, 0)
 
 [node name="Generator" parent="Site" instance=ExtResource("6_generator")]
-position = Vector3(-4.5, 0, 2)
+position = Vector3(-3.7, 0, -6)
 
 [node name="Table" parent="Site" instance=ExtResource("8_table")]
 position = Vector3(1.4, 0.02, -1.6)
@@ -79,6 +107,37 @@ position = Vector3(-1.9, 0.02, -1.5)
 
 [node name="Crate02" parent="Site" instance=ExtResource("9_crate")]
 position = Vector3(-1.9, 0.02, -0.7)
+
+[node name="Wires" type="Node3D" parent="Site"]
+
+[node name="WireGenCable" type="MeshInstance3D" parent="Site/Wires"]
+position = Vector3(-5.3, 0.44, -6)
+mesh = SubResource("mesh_wire_a1")
+
+[node name="WireGenDrop" type="MeshInstance3D" parent="Site/Wires"]
+position = Vector3(-4.7, 0.24, -6)
+mesh = SubResource("mesh_wire_drop")
+
+[node name="WireGenEnd" type="MeshInstance3D" parent="Site/Wires"]
+position = Vector3(-4.55, 0.04, -6)
+mesh = SubResource("mesh_wire_a3")
+
+[node name="WireHouseTop" type="MeshInstance3D" parent="Site/Wires"]
+position = Vector3(-6.5, 0.44, -4.9)
+mesh = SubResource("mesh_wire_b1")
+
+[node name="WireHouseDrop" type="MeshInstance3D" parent="Site/Wires"]
+position = Vector3(-6.5, 0.24, -4.2)
+mesh = SubResource("mesh_wire_drop")
+
+[node name="WireHouseRun" type="MeshInstance3D" parent="Site/Wires"]
+position = Vector3(-6.5, 0.04, -3.9)
+mesh = SubResource("mesh_wire_b3")
+
+[node name="WireHouseEnd" type="MeshInstance3D" parent="Site/Wires"]
+position = Vector3(-4.5, 0.04, -3.05)
+rotation = Vector3(0, 1.3017, 0)
+mesh = SubResource("mesh_wire_b4")
 
 [node name="Forest" type="Node3D" parent="."]
 
@@ -123,7 +182,7 @@ position = Vector3(-10, 0, -4)
 scale = Vector3(1.25, 1.25, 1.25)
 
 [node name="Tree11" parent="Forest" instance=ExtResource("3_tree")]
-position = Vector3(-7, 0, -8)
+position = Vector3(-7, 0, -9)
 scale = Vector3(1, 1, 1)
 
 [node name="Tree12" parent="Forest" instance=ExtResource("3_tree")]

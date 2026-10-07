@@ -21,10 +21,13 @@ Everything is built from Godot primitive meshes — no imported assets.
 - First-person player (`CharacterBody3D`) with movement, sprint, mouse look, jump, interaction ray.
 - Flat 160 x 160 m terrain.
 - Forest of 34 primitive trees (cylinder trunk + cone canopy).
-- Lattice radio mast with antenna and beacon, standing right next to the building.
+- Lattice radio mast with an antenna pole running from the ground to the beacon,
+  standing right next to the building. A transmitter machine sits at its base.
 - Maintenance building you can walk into (doorway at the front), furnished with a
   table and a couple of crates.
-- Generator next to the building: `E` starts / stops it (indicator light + label change).
+- Generator next to the tower: `E` starts / stops it (indicator light + label change).
+- Cables running out of the transmitter machine, over the tower pad and across the
+  ground to the generator and into the back wall of the building.
 - Radio on the table inside the building: `E` tunes the next channel (label above it changes).
 - Minimal HUD: crosshair, interaction prompt, control hints.
 
@@ -38,7 +41,7 @@ scenes/
   hud.tscn                 Crosshair, prompt label, controls hint
   props/
     tree.tscn              Primitive tree (instance it as many times as you like)
-    radio_tower.tscn       Lattice mast + antenna + beacon
+    radio_tower.tscn       Lattice mast + ground-to-top antenna + base machine + beacon
     maintenance_building.tscn  Walls, floor, roof, doorway (enterable)
     generator.tscn         Interactable generator
     radio.tscn             Interactable radio
