@@ -5,6 +5,8 @@ extends Control
 @onready var _power_label: Label = $Panel/Layout/PowerLabel
 @onready var _channel_label: Label = $Panel/Layout/ChannelLabel
 @onready var _signal_label: Label = $Panel/Layout/SignalLabel
+@onready var _status_label: Label = $Panel/Layout/StatusLabel
+@onready var _power_button: Button = $Panel/Layout/Buttons/PowerButton
 
 var _machine: Node = null
 
@@ -39,8 +41,9 @@ func _unhandled_input(event: InputEvent) -> void:
 
 
 func _on_power() -> void:
-	if _machine != null:
-		_machine.set_power(not _machine.power_on)
+	if _machine != null and not _machine.set_power(not _machine.power_on):
+		# Refused: the generator is offline (see antenna_control.set_power).
+		print("[antenna] power on refused: generator offline")
 	_refresh()
 
 
@@ -66,3 +69,15 @@ func _refresh() -> void:
 	_signal_label.text = "SIGNAL   : [%s%s] %d%%" % [
 		"#".repeat(filled), "-".repeat(10 - filled), _machine.signal_pct,
 	]
+	# Power is locked while the site generator is off: explain + grey the button.
+	var gen_ok: bool = _machine.generator_running()
+	_power_button.disabled = not gen_ok and not _machine.power_on
+	if not gen_ok:
+		_status_label.text = "GENERATOR OFFLINE - POWER LOCKED"
+		_status_label.add_theme_color_override("font_color", Color(1, 0.4, 0.3))
+	elif not _machine.power_on:
+		_status_label.text = "GENERATOR ONLINE - READY"
+		_status_label.add_theme_color_override("font_color", Color(0.4, 0.95, 0.6))
+	else:
+		_status_label.text = "TRANSMITTING"
+		_status_label.add_theme_color_override("font_color", Color(0.4, 0.95, 0.6))

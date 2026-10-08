@@ -33,7 +33,7 @@ height = 0.2
 [sub_resource type="BoxShape3D" id="shape_body"]
 size = Vector3(1.4, 1.7, 0.8)
 
-[node name="Generator" type="StaticBody3D" groups=["interactable"]]
+[node name="Generator" type="StaticBody3D" groups=["generator", "interactable"]]
 script = ExtResource("1_gen")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]

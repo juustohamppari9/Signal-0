@@ -81,6 +81,13 @@ layout_mode = 2
 theme_override_font_sizes/font_size = 16
 text = "SIGNAL   : [######----] 60%"
 
+[node name="StatusLabel" type="Label" parent="Panel/Layout"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.4, 0.3, 1)
+theme_override_font_sizes/font_size = 14
+text = "GENERATOR OFFLINE - POWER LOCKED"
+horizontal_alignment = 1
+
 [node name="Sep2" type="HSeparator" parent="Panel/Layout"]
 layout_mode = 2
 

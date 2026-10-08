@@ -28,10 +28,14 @@ Everything is built from Godot primitive meshes — no imported assets.
 - Control panel mounted on the tower leg next to the machine: `E` opens the antenna
   control GUI (POWER / TUNE / BOOST, pauses the game, `Esc` or CLOSE resumes).
   POWER also toggles the beacon blink and the machine indicator light.
+  Power is wired to the generator: the antenna starts **off**, POWER stays locked
+  (greyed button, red "GENERATOR OFFLINE" status) until the generator is running,
+  and stopping the generator kills the antenna power immediately.
 - Maintenance building you can walk into (doorway at the front), furnished with a
   table and a couple of crates, plus a framed glass window in the wall — from
   outside you can see straight through to the table, crates and the far doorway.
 - Generator next to the tower: `E` starts / stops it (indicator light + label change).
+  It feeds the antenna — nothing on the mast powers up while the generator is off.
 - Cables strung in the air on two wooden poles: out of the transmitter machine, up
   to the generator pole, down onto the generator, across to the house pole and into
   the building wall.
@@ -59,8 +63,10 @@ scenes/
 scripts/
   player.gd                Movement, mouse look, jump, interaction
   interactable.gd          Base class for interactable objects (get_prompt / interact)
-  antenna_control.gd       Shared by the machine + control panel: opens the GUI, beacon blink
-  antenna_gui.gd           GUI logic: open/close + pause, POWER/TUNE/BOOST handlers
+  antenna_control.gd       Shared by the machine + control panel: opens the GUI, beacon blink,
+                           generator power dependency (set_power refuses / auto-cuts)
+  antenna_gui.gd           GUI logic: open/close + pause, POWER/TUNE/BOOST handlers,
+                           generator status line + POWER lockout
   generator.gd             Generator behaviour
   radio.gd                 Radio behaviour
   hud.gd                   set_prompt(text) used by the player
