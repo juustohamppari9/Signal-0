@@ -22,12 +22,19 @@ Everything is built from Godot primitive meshes — no imported assets.
 - Flat 160 x 160 m terrain.
 - Forest of 34 primitive trees (cylinder trunk + cone canopy).
 - Lattice radio mast with an antenna pole running from the ground to the beacon,
-  standing right next to the building. A transmitter machine sits at its base.
+  standing right next to the building. A transmitter machine sits at its base, and
+  the hitbox matches the visible pad and four legs (you can walk between the legs —
+  no invisible wall box).
+- Control panel mounted on the tower leg next to the machine: `E` opens the antenna
+  control GUI (POWER / TUNE / BOOST, pauses the game, `Esc` or CLOSE resumes).
+  POWER also toggles the beacon blink and the machine indicator light.
 - Maintenance building you can walk into (doorway at the front), furnished with a
-  table and a couple of crates.
+  table and a couple of crates, plus a framed glass window in the wall — from
+  outside you can see straight through to the table, crates and the far doorway.
 - Generator next to the tower: `E` starts / stops it (indicator light + label change).
-- Cables running out of the transmitter machine, over the tower pad and across the
-  ground to the generator and into the back wall of the building.
+- Cables strung in the air on two wooden poles: out of the transmitter machine, up
+  to the generator pole, down onto the generator, across to the house pole and into
+  the building wall.
 - Radio on the table inside the building: `E` tunes the next channel (label above it changes).
 - Minimal HUD: crosshair, interaction prompt, control hints.
 
@@ -39,10 +46,12 @@ scenes/
   main.tscn                World: terrain, sun, sky, props, forest, player, HUD
   player.tscn              First-person player (capsule + head + camera + ray)
   hud.tscn                 Crosshair, prompt label, controls hint
+  antenna_gui.tscn         Antenna control GUI opened from the tower control panel
   props/
     tree.tscn              Primitive tree (instance it as many times as you like)
-    radio_tower.tscn       Lattice mast + ground-to-top antenna + base machine + beacon
-    maintenance_building.tscn  Walls, floor, roof, doorway (enterable)
+    radio_tower.tscn       Lattice mast + pad/leg hitbox + base machine + control panel + beacon
+    maintenance_building.tscn  Walls, floor, roof, doorway + framed glass window (enterable)
+    pole.tscn              Wooden pole with a crossarm; carries the cables in the air
     generator.tscn         Interactable generator
     radio.tscn             Interactable radio
     table.tscn             Primitive table (radio sits on top of it)
@@ -50,6 +59,8 @@ scenes/
 scripts/
   player.gd                Movement, mouse look, jump, interaction
   interactable.gd          Base class for interactable objects (get_prompt / interact)
+  antenna_control.gd       Shared by the machine + control panel: opens the GUI, beacon blink
+  antenna_gui.gd           GUI logic: open/close + pause, POWER/TUNE/BOOST handlers
   generator.gd             Generator behaviour
   radio.gd                 Radio behaviour
   hud.gd                   set_prompt(text) used by the player

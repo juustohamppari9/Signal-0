@@ -1,0 +1,109 @@
+[gd_scene load_steps=3 format=3]
+
+[ext_resource type="Script" path="res://scripts/antenna_gui.gd" id="1_gui"]
+
+[sub_resource type="StyleBoxFlat" id="sb_panel"]
+content_margin_left = 20.0
+content_margin_top = 18.0
+content_margin_right = 20.0
+content_margin_bottom = 18.0
+bg_color = Color(0.07, 0.09, 0.11, 0.97)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.35, 0.75, 0.55, 1)
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
+
+[node name="AntennaGUI" type="Control" groups=["antenna_gui"]]
+process_mode = 3
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_gui")
+
+[node name="Dimmer" type="ColorRect" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color(0, 0, 0, 0.5)
+
+[node name="Panel" type="PanelContainer" parent="."]
+layout_mode = 1
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -240.0
+offset_top = -180.0
+offset_right = 240.0
+offset_bottom = 180.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("sb_panel")
+
+[node name="Layout" type="VBoxContainer" parent="Panel"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="Title" type="Label" parent="Panel/Layout"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.4, 0.95, 0.6, 1)
+theme_override_font_sizes/font_size = 26
+text = "ANTENNA CONTROL"
+horizontal_alignment = 1
+
+[node name="Subtitle" type="Label" parent="Panel/Layout"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.5, 0.7, 0.6, 1)
+theme_override_font_sizes/font_size = 13
+text = "SIGNAL 0 // REMOTE SITE"
+horizontal_alignment = 1
+
+[node name="Sep1" type="HSeparator" parent="Panel/Layout"]
+layout_mode = 2
+
+[node name="PowerLabel" type="Label" parent="Panel/Layout"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 16
+text = "POWER    : ON"
+
+[node name="ChannelLabel" type="Label" parent="Panel/Layout"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 16
+text = "CHANNEL  : 1"
+
+[node name="SignalLabel" type="Label" parent="Panel/Layout"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 16
+text = "SIGNAL   : [######----] 60%"
+
+[node name="Sep2" type="HSeparator" parent="Panel/Layout"]
+layout_mode = 2
+
+[node name="Buttons" type="HBoxContainer" parent="Panel/Layout"]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="PowerButton" type="Button" parent="Panel/Layout/Buttons"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "POWER"
+
+[node name="TuneButton" type="Button" parent="Panel/Layout/Buttons"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "TUNE"
+
+[node name="BoostButton" type="Button" parent="Panel/Layout/Buttons"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "BOOST"
+
+[node name="CloseButton" type="Button" parent="Panel/Layout/Buttons"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "CLOSE"

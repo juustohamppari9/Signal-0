@@ -1,34 +1,44 @@
-[gd_scene load_steps=6 format=3]
+[gd_scene format=3 uid="uid://tnsn2jfdcvcj"]
+
+[sub_resource type="BoxShape3D" id="shape_crate"]
+size = Vector3(0.7, 0.7, 0.7)
 
 [sub_resource type="StandardMaterial3D" id="mat_crate"]
 albedo_color = Color(0.55, 0.42, 0.25, 1)
-roughness = 1.0
-
-[sub_resource type="StandardMaterial3D" id="mat_band"]
-albedo_color = Color(0.34, 0.25, 0.15, 1)
-roughness = 1.0
 
 [sub_resource type="BoxMesh" id="mesh_body"]
 material = SubResource("mat_crate")
 size = Vector3(0.7, 0.7, 0.7)
 
+[sub_resource type="StandardMaterial3D" id="mat_band"]
+albedo_color = Color(0.34, 0.25, 0.15, 1)
+
 [sub_resource type="BoxMesh" id="mesh_band"]
 material = SubResource("mat_band")
 size = Vector3(0.72, 0.08, 0.72)
 
-[sub_resource type="BoxShape3D" id="shape_crate"]
-size = Vector3(0.7, 0.7, 0.7)
+[node name="Crate" type="StaticBody3D" unique_id=1535967759]
 
-[node name="Crate" type="StaticBody3D"]
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-position = Vector3(0, 0.35, 0)
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=205884843]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.35, 0)
 shape = SubResource("shape_crate")
 
-[node name="Body" type="MeshInstance3D" parent="."]
-position = Vector3(0, 0.35, 0)
+[node name="Body" type="MeshInstance3D" parent="." unique_id=14239195]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.35, 0)
 mesh = SubResource("mesh_body")
 
-[node name="Band" type="MeshInstance3D" parent="."]
-position = Vector3(0, 0.5, 0)
+[node name="Band" type="MeshInstance3D" parent="." unique_id=343407413]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.55, 0)
+mesh = SubResource("mesh_band")
+
+[node name="Band2" type="MeshInstance3D" parent="." unique_id=808491338]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.15, 0)
+mesh = SubResource("mesh_band")
+
+[node name="Band3" type="MeshInstance3D" parent="." unique_id=1429508352]
+transform = Transform3D(-4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0, 1, 0.2, 0.35, 0)
+mesh = SubResource("mesh_band")
+
+[node name="Band4" type="MeshInstance3D" parent="." unique_id=927459742]
+transform = Transform3D(-4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0, 1, -0.2, 0.35, 0)
 mesh = SubResource("mesh_band")

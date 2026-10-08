@@ -105,7 +105,7 @@ func _update_prompt() -> void:
 	var next := ""
 	if target != null and target.has_method("get_prompt"):
 		next = target.get_prompt()
-	if next == _prompt:
-		return
 	_prompt = next
+	# Always push to the HUD: external UI (e.g. the antenna GUI) may clear the
+	# label, and a cache check here would leave it blank after closing.
 	get_tree().call_group("hud", "set_prompt", next)
