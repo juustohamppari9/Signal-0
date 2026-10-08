@@ -24,9 +24,12 @@ Everything is built from Godot primitive meshes — no imported assets.
 - Lattice radio mast with an antenna pole running from the ground to the beacon,
   standing right next to the building. A transmitter machine sits at its base, and
   the hitbox matches the visible pad and four legs (you can walk between the legs —
-  no invisible wall box).
-- Control panel mounted on the tower leg next to the machine: `E` opens the antenna
-  control GUI (POWER / TUNE / BOOST, pauses the game, `Esc` or CLOSE resumes).
+  no invisible wall box). `E` on the machine is a **power switch only**: the prompt
+  shows the state ("E - Turn on antenna" / "E - Turn off antenna" / "E - Locked:
+  start the generator") and it never opens a menu.
+- Control panel mounted on the tower leg next to the machine: the **only** place
+  that opens the antenna control GUI (POWER / TUNE / BOOST, pauses the game,
+  `Esc` or CLOSE resumes).
   POWER also toggles the beacon blink and the machine indicator light.
   Power is wired to the generator: the antenna starts **off**, POWER stays locked
   (greyed button, red "GENERATOR OFFLINE" status) until the generator is running,
@@ -63,8 +66,8 @@ scenes/
 scripts/
   player.gd                Movement, mouse look, jump, interaction
   interactable.gd          Base class for interactable objects (get_prompt / interact)
-  antenna_control.gd       Shared by the machine + control panel: opens the GUI, beacon blink,
-                           generator power dependency (set_power refuses / auto-cuts)
+  antenna_control.gd       Machine = power switch only; control panel opens the GUI,
+                           beacon blink, generator dependency (refuse on / auto-cut)
   antenna_gui.gd           GUI logic: open/close + pause, POWER/TUNE/BOOST handlers,
                            generator status line + POWER lockout
   generator.gd             Generator behaviour

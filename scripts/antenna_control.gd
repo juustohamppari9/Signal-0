@@ -1,9 +1,12 @@
 extends "res://scripts/interactable.gd"
 ## Antenna machine (under the mast) and its wall control panel.
 ##
-## Press E to open the antenna control GUI (scenes/antenna_gui.tscn).
-## The node in the "antenna_machine" group (the machine cabinet) owns the
-## antenna state; the wall panel just forwards to it.
+## Each node reacts differently to E:
+##   - Machine cabinet (group "antenna_machine"): toggles antenna power directly.
+##     The GUI is NOT reachable from here; the prompt reflects the state
+##     (turn on / turn off / locked while the generator is off).
+##   - Wall control panel: the only place that opens the antenna control GUI
+##     (scenes/antenna_gui.tscn), which talks to the machine's state.
 ##
 ## Power dependency: the antenna starts OFF and can only be switched on while
 ## the site generator (group "generator") is running. If the generator stops,
@@ -32,10 +35,24 @@ func _ready() -> void:
 
 
 func get_prompt() -> String:
-	return "E - Antenna control"
+	if not is_in_group(MACHINE_GROUP):
+		return "E - Antenna control"  # wall panel: opens the GUI
+	if power_on:
+		return "E - Turn off antenna"
+	if generator_running():
+		return "E - Turn on antenna"
+	return "E - Locked: start the generator"
 
 
-func interact(player: Node) -> void:
+func interact(_player: Node) -> void:
+	if is_in_group(MACHINE_GROUP):
+		# Machine cabinet: power switch only, no GUI.
+		if set_power(not power_on):
+			print("[antenna] power ", "on" if power_on else "off")
+		else:
+			print("[antenna] power on refused: generator offline")
+		return
+	# Wall control panel: the one and only entry to the control GUI.
 	var gui := get_tree().get_first_node_in_group(GUI_GROUP)
 	if gui == null:
 		push_warning("antenna control: no node in group '%s'" % GUI_GROUP)

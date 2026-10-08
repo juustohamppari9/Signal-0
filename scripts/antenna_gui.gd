@@ -1,5 +1,6 @@
 extends Control
-## Antenna control GUI, opened with E on the machine under the mast.
+## Antenna control GUI, opened with E on the wall control panel (the only
+## entry point — the machine cabinet itself is a plain power switch).
 ## Pauses the game while open; Esc or the CLOSE button dismisses it.
 
 @onready var _power_label: Label = $Panel/Layout/PowerLabel
