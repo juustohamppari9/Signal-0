@@ -44,6 +44,7 @@ albedo_color = Color(0.9, 0.12, 0.1, 1)
 roughness = 0.5
 
 [sub_resource type="SphereMesh" id="mesh_beacon"]
+lightmap_size_hint = Vector2i(8, 5)
 material = SubResource("mat_beacon")
 radius = 0.2
 height = 0.4
